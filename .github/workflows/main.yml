@@ -9,17 +9,19 @@ jobs:
   deploy-to-stage:
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
      - name: Setup Node.js
-         uses: actions/setup-node@v3
+       uses: actions/setup-node@v3
+       with:  # Correct indentation and structure
+         node-version: '18'
+         registry-url: 'https://registry.npmjs.org/'
+         
+     - name: Checkout repository
+       uses: actions/checkout@v3
+       with:
+         fetch-depth: 0
+
      - name: Check for version change
-         id: version_changed
-         with:
-           node-version: '18'
-           registry-url: 'https://registry.npmjs.org/'
-      uses: EndBug/version-check@v2
-      with: 
-        token: ${{ secrets.GITHUB_TOKEN }}
-        diff-search: true # Search for changes in the last commit 
+       uses: EndBug/version-check@v2
+       with: 
+         token: ${{ secrets.GITHUB_TOKEN }}
+         diff-search: true  # Correct indentation and spacing
